@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Satoshi-Bold';
+  /* Name of the font */
+  font-style: normal;
+  /* Font style (e.g., normal, italic) */
+  font-weight: 700;
+  /* Specific font weight */
+  font-display: swap;
+  /* Fallback font display strategy */
+  src: url('/src/assets/fonts/Satoshi-Bold.otf') format('opentype');
+  /* Adjusted path */
+}
+
+@font-face {
+  font-family: 'Satoshi-Regular';
+  /* Name of the font */
+  font-style: normal;
+  /* Font style (e.g., normal, italic) */
+  font-weight: 400;
+  /* Specific font weight */
+  font-display: swap;
+  /* Fallback font display strategy */
+  src: url('/src/assets/fonts/Satoshi-Regular.otf') format('opentype');
+  /* Adjusted path */
+}
+
+
+@theme {
+  --font-satoshi-bold: "Satoshi-Bold", "sans-serif";
+  --font-satoshi-regular: "Satoshi-Regular", "sans-serif";
+  --animate-wiggle: wiggle 1s ease-in-out forwards;
+  --animate-fade-up: reveal-from-bottom 2s ease-in-out forwards;
+  --animate-slide-right: slide-right 2s ease-out forwards;
+  --animate-appear: appear 4s ease-out forwards;
+
+
+  @keyframes wiggle {
+    0% {
+      transform: translateY(0) scale(1);
+
+    }
+
+    100% {
+      transform: translateY(-200px) scale(0.25);
+    }
+  }
+
+  @keyframes reveal-from-bottom {
+    0% {
+      clip-path: inset(100% 0 0 0);
+      opacity: 0;
+    }
+
+    100% {
+      clip-path: inset(0 0 0 0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-right {
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(37.5vw);
+    }
+  }
+
+  @keyframes appear {
+    0%, 50% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+}
