@@ -1,4 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import '../index.css'
+import { Canvas } from '@react-three/fiber'; // Import Canvas
+import { OrbitControls } from '@react-three/drei';
+import Spectacles from './Spectacles';
+
 
 
 
@@ -24,8 +29,19 @@ const Hero = () => {
         <div className="text-white flex mx-[2vw] items-center h-screen text-[13.5vw] font-satoshi-bold tracking-tight animate-fade-up">
           GEEK R
 
-          <div className={`${state === 1 ? 'animate-appear' : 'hidden'} text-amber-500 absolute right-[22vw]`}>
-            OO
+          <div className={`${state === 1 ? 'animate-appear' : 'hidden'} text-amber-500 absolute width-[100vw] top-[14vh] left-[48vw]`}>
+            <Canvas
+              camera={{ position: [0, -20, 10], fov: 100 }}
+              style={{ height: '90vh', width: '40vw' }}
+            >
+              <ambientLight />
+              <Spectacles />
+              <OrbitControls
+                maxPolarAngle={Math.PI / 2}  // Limits the downward rotation
+                minPolarAngle={Math.PI / 2}  // Limits the upward rotation
+                enableZoom={false}            // Optional: Disable zooming
+              />
+            </Canvas>
           </div>
 
           <div
@@ -38,17 +54,19 @@ const Hero = () => {
           >
             OO
           </div> */}
-          
+
         </div>
 
         <div className={`text-2xl absolute text-white font-satoshi-regular top-[62vh] right-[2.3vw] ${state === 1 ? 'animate-appear' : 'hidden'} `}>
-            <p>A community dedicated to helping each other get better together</p>
-          </div>
+          <p>A community dedicated to helping each other get better together</p>
+        </div>
 
 
 
       </section>
     </main>
+
+
   )
 }
 
