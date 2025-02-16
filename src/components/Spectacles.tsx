@@ -1,176 +1,163 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { useThree } from '@react-three/fiber';
-import { Raycaster, Vector2, Object3D } from 'three';
+import { Vector2, Mesh, MeshStandardMaterial, Box3, Vector3, Object3D, PerspectiveCamera } from 'three';
 import { useGLTF } from '@react-three/drei';
 
-function Spectacles() {
-  const { scene, camera } = useThree();
+interface SpectaclesProps {
+  onMagnify: (side: 'left' | 'right') => void;
+  isMobile?: boolean;
+}
+
+const LENS_COLORS = {
+  left: '#87CEEB',  // Blue
+  right: '#ffb3b3'  // Pink/Red
+} as const;
+
+const Spectacles: React.FC<SpectaclesProps> = ({ onMagnify, isMobile = false }): JSX.Element => {
+  const { camera, raycaster, gl, size } = useThree();
   const { scene: modelScene } = useGLTF('/3d_objects/gr_spectacles_ver_2.glb');
-  const leftLensRef = useRef();
-  const rightLensRef = useRef();
-  const mousePosition = useRef(new Vector2());
-  const raycaster = useRef(new Raycaster());
+  const leftLensRef = useRef<Mesh | null>(null);
+  const rightLensRef = useRef<Mesh | null>(null);
+  const [isClickable, setIsClickable] = useState(true);
   
-  // Store original colors to restore them when not hovering
-  const [originalLeftColor, setOriginalLeftColor] = useState(null);
-  const [originalRightColor, setOriginalRightColor] = useState(null);
+  const leftLensMeshes = useRef<Mesh[]>([]);
+  const rightLensMeshes = useRef<Mesh[]>([]);
 
-  // Function to handle click on left lens
-  const onLeftLensClick = () => {
-    console.log("Left lens clicked!");
-    if (leftLensRef.current) {
-      leftLensRef.current.material.color.setHex(0xff0000);
-    }
-  };
+  const handlePointerEvent = useCallback((event: MouseEvent | TouchEvent) => {
+    if (!isClickable) return;
 
-  // Function to handle click on right lens
-  const onRightLensClick = () => {
-    console.log("Right lens clicked!");
-    if (rightLensRef.current) {
-      rightLensRef.current.material.color.setHex(0x0000ff);
-    }
-  };
+    event.preventDefault();
 
-  const handleMouseMove = (event) => {
-    // Calculate mouse position in normalized device coordinates
-    mousePosition.current.x = (event.clientX / window.innerWidth) * 2 - 1;
-    mousePosition.current.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    const clientX = 'touches' in event && event.touches[0] 
+      ? event.touches[0].clientX 
+      : 'clientX' in event 
+        ? event.clientX 
+        : null;
+    const clientY = 'touches' in event && event.touches[0] 
+      ? event.touches[0].clientY 
+      : 'clientY' in event 
+        ? event.clientY 
+        : null;
 
-    // Set the raycaster's origin and direction based on the camera and mouse position
-    raycaster.current.setFromCamera(mousePosition.current, camera);
+    if (clientX === null || clientY === null) return;
 
-    // Check for intersections with the lenses
-    const intersects = raycaster.current.intersectObjects([
-      leftLensRef.current,
-      rightLensRef.current
-    ], true);
+    const rect = gl.domElement.getBoundingClientRect();
+    const mouse = new Vector2(
+      ((clientX - rect.left) / rect.width) * 2 - 1,
+      -((clientY - rect.top) / rect.height) * 2 + 1
+    );
 
-    // Reset colors first
-    if (leftLensRef.current && originalLeftColor) {
-      leftLensRef.current.material.color.setHex(originalLeftColor);
-    }
-    if (rightLensRef.current && originalRightColor) {
-      rightLensRef.current.material.color.setHex(originalRightColor);
-    }
+    raycaster.setFromCamera(mouse, camera);
+    
+    const leftIntersects = raycaster.intersectObjects(leftLensMeshes.current);
+    const rightIntersects = raycaster.intersectObjects(rightLensMeshes.current);
 
-    // Apply hover color if intersecting
-    if (intersects.length > 0) {
-      const intersectedObject = intersects[0].object;
-      let currentObject = intersectedObject;
-      
-      while (currentObject) {
-        if (currentObject === leftLensRef.current) {
-          leftLensRef.current.material.color.setHex(0x00ff00); // Green for hover
-          break;
-        } else if (currentObject === rightLensRef.current) {
-          rightLensRef.current.material.color.setHex(0x00ff00); // Green for hover
-          break;
-        }
-        currentObject = currentObject.parent;
+    if (isClickable) {
+      if (leftIntersects.length > 0 && (!rightIntersects.length || leftIntersects[0].distance < rightIntersects[0].distance)) {
+        onMagnify('left');
+      } else if (rightIntersects.length > 0) {
+        onMagnify('right');
       }
+
+      setIsClickable(false);
+      setTimeout(() => setIsClickable(true), 300);
     }
-  };
+  }, [camera, raycaster, onMagnify, isClickable, gl]);
 
-  const handleClick = (event) => {
-    mousePosition.current.x = (event.clientX / window.innerWidth) * 2 - 1;
-    mousePosition.current.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-    raycaster.current.setFromCamera(mousePosition.current, camera);
-
-    const intersects = raycaster.current.intersectObjects([
-      leftLensRef.current,
-      rightLensRef.current
-    ], true);
-
-    if (intersects.length > 0) {
-      const intersectedObject = intersects[0].object;
-      console.log('Intersected object name:', intersectedObject.name);
-      
-      let currentObject = intersectedObject;
-      while (currentObject) {
-        if (currentObject === leftLensRef.current) {
-          onLeftLensClick();
-          break;
-        } else if (currentObject === rightLensRef.current) {
-          onRightLensClick();
-          break;
-        }
-        currentObject = currentObject.parent;
-      }
-    }
-  };
-
-  // Set up event listeners
   useEffect(() => {
-    window.addEventListener('click', handleClick);
-    window.addEventListener('mousemove', handleMouseMove);
+    const canvasElement = gl.domElement;
+    const options: AddEventListenerOptions = { passive: false };
+    
+    canvasElement.addEventListener('click', handlePointerEvent, options);
+    canvasElement.addEventListener('touchstart', handlePointerEvent, options);
+    
     return () => {
-      window.removeEventListener('click', handleClick);
-      window.removeEventListener('mousemove', handleMouseMove);
+      canvasElement.removeEventListener('click', handlePointerEvent, options);
+      canvasElement.removeEventListener('touchstart', handlePointerEvent, options);
+    };
+  }, [handlePointerEvent, gl]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (camera instanceof PerspectiveCamera) {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+      }
+    };
+    
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
     };
   }, [camera]);
 
-  // Initialize lens references when the model loads
   useEffect(() => {
-    console.log('Model scene loaded, searching for lenses...');
+    leftLensMeshes.current = [];
+    rightLensMeshes.current = [];
+  
+    const setupLens = (object: Object3D) => {
+      if (!(object instanceof Mesh)) return;
+      
+      const isLeftLens = object.name.includes('polySurface2');
+      const isRightLens = object.name.includes('polySurface3');
+      
+      if (!isLeftLens && !isRightLens) return;
     
-    modelScene.traverse((object) => {
-      if (object.isMesh) {
-        console.log('Found mesh in scene:', object.name);
-        if (object.material) {
-          object.material.transparent = true;
-          object.material.opacity = 0.6;
-        }
+      const material = new MeshStandardMaterial({
+        transparent: true,
+        opacity: 0.6,
+        metalness: 0.5,
+        roughness: 0.5,
+        depthWrite: true,
+        depthTest: true,
+        side: 2,
+      });
+    
+      if (!object.geometry.boundingBox) {
+        object.geometry.computeBoundingBox();
+        object.geometry.computeBoundingSphere();
       }
-    });
-
-    const leftLens = findMeshByNamePattern(modelScene, 'polySurface2_Glass_0');
-    const rightLens = findMeshByNamePattern(modelScene, 'polySurface3_Glass_0');
-
-    if (leftLens) {
-      console.log('Left lens found:', leftLens.name);
-      leftLensRef.current = leftLens;
-      if (leftLens.material) {
-        leftLens.material.transparent = true;
-        leftLens.material.opacity = 0.5;
-        leftLens.material.depthWrite = false;
-        // Store original color
-        setOriginalLeftColor(leftLens.material.color.getHex());
+    
+      // Adjusted expansion factor
+      const expansionFactor = 1.0;  // Same for both mobile and desktop
+      object.geometry.boundingBox?.expandByScalar(expansionFactor);
+    
+      if (isLeftLens) {
+        material.color.setStyle(LENS_COLORS.left);
+        leftLensRef.current = object;
+        leftLensMeshes.current.push(object);
+      } else {
+        material.color.setStyle(LENS_COLORS.right);
+        rightLensRef.current = object;
+        rightLensMeshes.current.push(object);
       }
-    } else {
-      console.warn('Left lens not found in the model');
-    }
+    
+      object.material = material;
+      object.userData.interactive = true;
+      object.layers.enable(0);
+      object.renderOrder = 1;
+      object.frustumCulled = false;
+      object.matrixAutoUpdate = true;
+    };
+  
+    modelScene.traverse(setupLens);
+  }, [modelScene, isMobile]);
 
-    if (rightLens) {
-      console.log('Right lens found:', rightLens.name);
-      rightLensRef.current = rightLens;
-      if (rightLens.material) {
-        rightLens.material.transparent = true;
-        rightLens.material.opacity = 0.5;
-        rightLens.material.depthWrite = false;
-        // Store original color
-        setOriginalRightColor(rightLens.material.color.getHex());
-      }
-    } else {
-      console.warn('Right lens not found in the model');
-    }
-  }, [modelScene]);
-
-  // Function to find meshes by name pattern
-  const findMeshByNamePattern = (scene: Object3D, pattern: string) => {
-    let found = null;
-    scene.traverse((object) => {
-      if (object.isMesh && object.name.includes(pattern)) {
-        console.log('Found mesh:', object.name);
-        found = object;
-      }
-    });
-    return found;
-  };
+  const spectaclesScale = isMobile ? [1, 3, 1] : [4, 4, 4];  // Adjusted scales
+const spectaclesPosition = isMobile ? [0, -2.5, 0]: [0, -4, 0];
 
   return (
-    <primitive object={modelScene} scale={[5, 5, 5]} />
+    <primitive 
+      object={modelScene} 
+      scale={spectaclesScale}
+      position={spectaclesPosition}
+      rotation={[0, 0, 0]}
+    />
   );
-}
+};
+
+useGLTF.preload('/3d_objects/gr_spectacles_ver_2.glb');
 
 export default Spectacles;
