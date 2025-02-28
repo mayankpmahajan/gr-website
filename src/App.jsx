@@ -4,6 +4,8 @@ import About from "./pages/About";
 import Contacts from "./pages/Contacts";
 import Events from "./pages/Events";
 import Hero from "./pages/Hero";
+import FAQPage from "./components/Faq";
+import Partners from "./components/Partners";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import JoinUs from "./pages/JoinUs";
 
@@ -17,6 +19,8 @@ function App() {
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/events" element={<Events />} />
         <Route path="/joinus" element={<JoinUs />} />
+        <Route path="/faqs" element={<FAQPage />} />
+        <Route path="/partners" element={<Partners />} />
       </Routes>
     </BrowserRouter>
   );
