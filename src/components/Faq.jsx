@@ -45,7 +45,7 @@ const FAQPage = () => {
     },
     {
       question: "What is Code Kshetra and what makes it unique?",
-      answer: "Simple the greatest event of all time!! XD"
+      answer: "Simple the greatest event of all time!! Yay!! XD"
     },
   ];
 
