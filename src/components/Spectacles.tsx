@@ -10,7 +10,7 @@ interface SpectaclesProps {
 
 const LENS_COLORS = {
   left: '#87CEEB',  // Blue
-  right: '#ffb3b3'  // Pink/Red
+  right: '#f6916c'  // Pink/Red
 } as const;
 
 const Spectacles: React.FC<SpectaclesProps> = ({ onMagnify, isMobile = false }): JSX.Element => {
