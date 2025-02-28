@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import DecryptedText from './DecryptedText'
+import DecryptedText from "./DecryptedText";
 
 function Navbar() {
   return (
     <div className="w-full flex items-center justify-center px-4">
-      <div className="fixed bottom-6 sm:bottom-12 bg-[#242424] z-10 w-full sm:w-2/5 md:w-2/5 lg:w-1/3 xl:w-1/3 flex justify-between py-2 rounded-full items-center shadow-lg">
+      <div className="fixed bottom-6 sm:bottom-12 bg-[#242424] z-10 sm:w-3/5 md:w-1/2 lg:w-1/3 xl:w-1/3 flex justify-between py-2 rounded-full items-center shadow-lg">
         <Link to="/">
           <button className="cursor-pointer text-white text-sm sm:text-base px-2 pl-8">
           <DecryptedText text="Home" />
