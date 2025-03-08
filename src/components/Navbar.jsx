@@ -11,26 +11,26 @@ function Navbar() {
           <DecryptedText text="Home" />
           </button>
         </Link>
-        <Link to="/about">
-          <button className="cursor-pointer text-white text-sm sm:text-base px-2">
-          <DecryptedText text="About" />
-          </button>
-        </Link>
         <Link to="/events">
           <button className="cursor-pointer text-white text-sm sm:text-base px-2">
           <DecryptedText text="Events" />
           </button>
         </Link>
-
-        <Link to="/contacts">
+        <Link to="/career">
           <button className="cursor-pointer text-white text-sm sm:text-base px-2">
-          <DecryptedText text="Contacts" />
+          <DecryptedText text="Career" />
           </button>
         </Link>
 
-        <Link to="/joinus" className="flex items-center px-2">
+        <Link to="/outeam">
+          <button className="cursor-pointer text-white text-sm sm:text-base px-2">
+          <DecryptedText text="Our Team" />
+          </button>
+        </Link>
+
+        <Link to="/contactus" className="flex items-center px-2">
           <button className="cursor-pointer text-[#f15a22] text-sm sm:text-base">
-          <DecryptedText text="Join Us" />
+          <DecryptedText text="Contact Us" />
           </button>
           <button className="cursor-pointer ml-2">
             <div className="w-8 h-8 sm:w-10 sm:h-10 bg-[#f15a22] rounded-full"></div>
