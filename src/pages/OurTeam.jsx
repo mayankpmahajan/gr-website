@@ -1,8 +1,13 @@
 import React from 'react'
+import Presidents from '../components/Presidents'
+import CoreTeam from '../components/CoreTeam'
 
 const OurTeam = () => {
   return (
-    <div>OurTeam</div>
+    <div className='bg-black'>
+    <Presidents />
+    <CoreTeam />
+    </div>
   )
 }
 
