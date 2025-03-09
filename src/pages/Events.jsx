@@ -150,7 +150,7 @@ export default function Events() {
 // Event Card Component
 function EventCard({ event }) {
   return (
-    <div className="bg-[#F2F2F2] p-6 rounded-lg flex flex-col gap-3 relative transition-transform hover:scale-105 shadow-lg shadow-[#F15A22]">
+    <div className="bg-[#F2F2F2] p-6 rounded-lg flex flex-col gap-3 relative transition-transform hover:scale-105">
       {/* Profile + Event Name */}
       <div className="flex items-center gap-4">
         <div className="h-34 w-34 object-cover bg-gray-300 rounded-full">
@@ -181,7 +181,10 @@ function EventCard({ event }) {
             </a>
           </div>
         </div>
-        <button className="bg-[#F15A22] text-[#121212] px-4 py-2 rounded-lg font-semibold">
+        <button
+          className="bg-[#F15A22] text-[#121212] px-4 py-2 rounded-lg font-semibold cursor-pointer"
+          onClick={() => window.open(event.social, "_blank")}
+        >
           <a href={event.social}>View</a>
         </button>
       </div>
