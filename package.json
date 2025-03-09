@@ -12,17 +12,14 @@
   "dependencies": {
     "@react-three/drei": "^9.121.4",
     "@react-three/fiber": "^8.17.12",
-
-    "@tailwindcss/vite": "^4.0.0",
-    "lucide-react": "^0.476.0",
-
     "@tailwindcss/vite": "^4.0.6",
     "framer-motion": "^12.4.4",
-
     "gsap": "^3.12.7",
+    "lucide-react": "^0.476.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.2.0",
+    "swiper": "^11.2.5",
     "three": "^0.172.0"
   },
   "devDependencies": {
