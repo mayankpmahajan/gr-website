@@ -90,9 +90,9 @@ export default function CoreTeam() {
       <h1 className="md:text-6xl mt-20 text-5xl text-white font-bold text-center mb-32">
         THE CORE
       </h1>
-      
+
       <div className="flex flex-col lg:flex-row gap-6 justify-between pb-20 items-center w-full max-w-screen-xl mx-auto px-4">
-        {/* Left Side - Image Carousel (BIG SIZE) */}
+        {/* Image Carousel */}
         <div className="relative w-full lg:w-2/5 max-w-lg">
           <div className="bg-gray-200 rounded-lg overflow-hidden aspect-video relative shadow-md">
             <img
@@ -103,51 +103,90 @@ export default function CoreTeam() {
           </div>
 
           {/* Slide Indicators */}
-          <div className="flex justify-center mt-4 gap-2 sm:gap-3">
-            {carouselData.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setActiveIndex(index)}
-                className={`w-6 h-6 sm:w-8 sm:h-8 rounded-full transition-colors ${
-                  index === activeIndex ? "bg-orange-600" : "bg-gray-400"
-                }`}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
+          <div className="flex justify-center mt-4 gap-1 sm:gap-2 relative">
+            {carouselData.map((_, index) => {
+              const totalVisibleDots = 5;
+              const midPoint = Math.floor(totalVisibleDots / 2);
+              let scaleClass = "scale-75 opacity-50";
+
+              if (
+                index === activeIndex ||
+                (totalItems > totalVisibleDots &&
+                  index >= activeIndex - midPoint &&
+                  index <= activeIndex + midPoint)
+              ) {
+                scaleClass =
+                  index === activeIndex
+                    ? "scale-110 opacity-100"
+                    : "scale-90 opacity-80";
+              }
+
+              return (
+                <button
+                  key={index}
+                  onClick={() => setActiveIndex(index)}
+                  className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-all duration-300 ${scaleClass} ${
+                    index === activeIndex ? "bg-orange-600" : "bg-gray-400"
+                  }`}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              );
+            })}
           </div>
         </div>
 
-        {/* Middle Section - Video and User Info (SHIFTED RIGHT) */}
-        <div className="relative w-full lg:w-1/4 max-w-sm rounded-xl overflow-hidden shadow-md border border-gray-300 bg-white">
-          <div className="bg-white p-3 flex items-center gap-2 border-b border-gray-300">
-            <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-blue-500 shadow-sm">
+        {/* Middle Section - Video */}
+        <div className="relative w-full lg:w-1/4 max-w-sm rounded-2xl overflow-hidden shadow-xl border border-gray-200 bg-white">
+          {/* Profile Section */}
+          <div className="bg-white p-4 flex items-center gap-3 border-b border-gray-200">
+            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-blue-500 shadow-md">
               <img
                 src={activeItem.user.avatar}
                 alt={activeItem.user.name}
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="text-gray-800">
-              <div className="text-sm font-semibold">
-                {activeItem.user.name}
-              </div>
-              <div className="text-xs text-gray-500">
+            <div className="text-gray-900">
+              <div className="text-base font-bold">{activeItem.user.name}</div>
+              <div className="text-sm text-gray-500">
                 {activeItem.user.position}
               </div>
             </div>
           </div>
 
-          <div className="aspect-[9/16] relative group w-full">
+          {/* Video Section */}
+          <div className="relative aspect-[9/16] group w-full bg-gray-100">
             <img
               ref={videoRef}
               src={activeItem.video}
               alt={`Video ${activeIndex + 1}`}
-              className="w-full h-full object-cover brightness-95 group-hover:brightness-110 transition-all duration-300"
+              className="w-full h-full object-cover brightness-95 group-hover:brightness-105 transition-all duration-300"
             />
+
+            {/* Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-white/5 via-transparent to-black/10"></div>
+
+            {/* Hover Play Icon */}
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="white"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="white"
+                className="w-12 h-12 bg-black/30 rounded-full p-2 shadow-xl hover:bg-black/50 transition-all duration-300"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5.25 5.25v13.5L18.75 12 5.25 5.25z"
+                />
+              </svg>
+            </div>
           </div>
         </div>
 
-        {/* Right Side - Profile Indicators + Arrows (COMPACT) */}
+        {/* Right Side - Profile Indicators + Arrows */}
         <div className="flex flex-col lg:items-end gap-4 relative w-full lg:w-1/10 md:pr-10  max-w-xs">
           <div className="flex overflow-hidden lg:h-60 lg:flex-col flex-row items-center justify-center">
             {Array.from({ length: itemsPerView }).map((_, i) => {
