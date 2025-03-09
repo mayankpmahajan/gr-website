@@ -48,7 +48,7 @@ const pastEvents = [
     venue: "New Delhi",
     social: "https://code-kshetra-2.devfolio.co/",
     details:
-      "🌟 Code Kshetra: Where Innovation Meets Madness🌟Are you ready to unleash your inner tech wizard, survive on caffeine, and redefine what it means to innovate?Code Kshetra isn’t just a hackathon – it’s a 36-hour rollercoaster of creativity, chaos, and cutting-edge ideas, hosted by JIMS Sector-5 Rohini and the tech rebels at Geek Room.",
+      "🌟 Code Kshetra 2.0: Where Innovation Meets Madness🌟Are you ready to unleash your inner tech wizard, survive on caffeine, and redefine what it means to innovate?Code Kshetra isn’t just a hackathon – it’s a 36-hour rollercoaster of creativity, chaos, and cutting-edge ideas, hosted by JIMS Sector-5 Rohini and the tech rebels at Geek Room.",
     link: "https://codekshetra2.geekroom.in/",
     image: "/public/ab7.jpg",
   },
