@@ -79,7 +79,7 @@ const ongoingEvents = [
     venue: "Global - Online",
     social: "https://lu.ma/9mqll98a",
     details:
-      "Join TechMinds, an exhilarating hackathon co-organized by Geek Room and the Artificial Intelligence Experience Centre, IITM Janakpuri. This event invites tech enthusiasts and innovators to push the boundaries of creativity and technology. Scheduled for 15th and 16th March 2024, this 30-hour offline event in Delhi will feature live project presentations, idea pitching sessions, and judging by an esteemed panel",
+      "Welcome to Pears Hackathon 2025, hosted in collaboration with Geek Room and Pears Technology! This global online hackathon invites participants from all over the world to innovate, collaborate, and build cutting-edge projects using Pears Technology.Whether you're a student, professional, or coding enthusiast, this is your chance to showcase your creativity, solve real-world problems, and compete for exciting rewards. With expert mentorship, challenging problem statements, and a collaborative innovation space, we aim to provide an unforgettable hackathon experience.",
     link: "https://pearshack.geekroom.in/",
     image: "public/pears.jpg",
   },
