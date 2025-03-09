@@ -7,7 +7,7 @@ import Hero from "./pages/Hero";
 import FAQPage from "./components/Faq";
 import Partners from "./components/Partners";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import JoinUs from "./pages/JoinUs";
+import OurTeam from "./pages/OurTeam";
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/events" element={<Events />} />
-        <Route path="/joinus" element={<JoinUs />} />
+        <Route path="/ourTeam" element={<OurTeam />} />
         <Route path="/faqs" element={<FAQPage />} />
         <Route path="/partners" element={<Partners />} />
       </Routes>

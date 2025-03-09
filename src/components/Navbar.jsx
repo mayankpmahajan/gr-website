@@ -22,7 +22,7 @@ function Navbar() {
           </button>
         </Link>
 
-        <Link to="/outeam">
+        <Link to="/ourteam">
           <button className="cursor-pointer text-white text-sm sm:text-base px-2">
           <DecryptedText text="Our Team" />
           </button>
