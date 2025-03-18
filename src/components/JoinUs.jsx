@@ -23,9 +23,9 @@ const jobListings = [
 
 export default function JoinUs() {
     return (
-      <section className="w-full py-12 flex justify-center items-center min-h-screen">
+      <section className="w-full py-12 flex justify-center items-center min-h-screen bg-black">
         <div className="container px-4 md:px-6">
-          <h2 className="md:text-8xl text-5xl font-bold mb-12 text-[#fff] text-center">JOIN US</h2>
+          <h2 className="md:text-9xl text-5xl font-bold mb-12 text-[#fff] text-center">JOIN US</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
             {jobListings.map((job, index) => (
               <div key={index} className="bg-zinc-900 mt-16 text-white rounded-lg overflow-hidden">
