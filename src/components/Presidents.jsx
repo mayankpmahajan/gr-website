@@ -61,7 +61,7 @@ export default function TeamCarousel() {
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-black text-white py-12 px-4 relative">
-      <h1 className="md:text-6xl text-5xl font-bold text-center mb-32">THE PRESIDENTS</h1>
+      <h1 className="md:text-9xl text-5xl font-bold text-center mb-32">THE PRESIDENTS</h1>
 
       <div className="relative w-full max-w-6xl mx-auto">
         <Carousel
@@ -89,11 +89,11 @@ export default function TeamCarousel() {
                 key={member.id}
                 className="pl-4 md:basis-1/3 basis-full"
               >
-                <div className="h-[26rem] flex items-center justify-center">
+                <div className="h-[30rem] flex items-center justify-center">
                   <Card
                     className={`relative overflow-hidden border-2 transition-all duration-700 ease-in-out transform 
                     ${index === activeIndex ? "border-blue-500 scale-105" : "border-gray-700 scale-95"}
-                    bg-gray-800 h-[350px] w-[80%] mx-auto`}
+                    bg-gray-800 h-[28rem] w-[80%] mx-auto`}
                   >
                     <CardContent className="p-0 relative w-full h-full">
                       <img
