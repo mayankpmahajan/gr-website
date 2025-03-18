@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { IoShareSocial } from "react-icons/io5";
 import { motion } from "framer-motion";
+import { gsap } from "gsap";
 
 const upcomingEvents = [
   {
@@ -97,6 +98,28 @@ export default function Events() {
           coding together&apos;&apos;
         </p>
       </motion.section>
+
+      <section>
+        <h1 className="text-[2.3rem] md:ml-[24px] md:text-[4rem] font-satoshi-bold text-center tracking-tight mb-3 md:mb-2 md:mt-[7rem] text-[#F2F2F2]">
+          SPOTLIGHT 🚀
+        </h1>
+        <section className="relative flex justify-center items-center min-h-screen bg-[#121212] px-5 md:px-20">
+          {/* Left Box (Orange) */}
+          <div
+            className="absolute w-32 h-32 md:w-56 md:h-56 bg-orange-500 rounded-xl 
+               md:left-[10rem] top-[4rem] md:top-50"
+          ></div>
+
+          {/* Center Box (Black) */}
+          <div className="w-80 h-80 md:w-[29vw] md:h-[90vh] bg-gray-800 rounded-xl "></div>
+
+          {/* Right Box (Blue) */}
+          <div
+            className="absolute w-32 h-32 md:w-56 md:h-56 bg-cyan-500 rounded-xl 
+               md:right-[10rem] bottom-[4rem] md:top-[26rem]"
+          ></div>
+        </section>
+      </section>
 
       {/* Upcoming Events */}
       <motion.section
