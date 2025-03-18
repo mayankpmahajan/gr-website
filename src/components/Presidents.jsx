@@ -92,8 +92,8 @@ export default function TeamCarousel() {
                 <div className="h-[30rem] flex items-center justify-center">
                   <Card
                     className={`relative overflow-hidden border-2 transition-all duration-700 ease-in-out transform 
-                    ${index === activeIndex ? "border-blue-500 scale-105" : "border-gray-700 scale-95"}
-                    bg-gray-800 h-[28rem] w-[80%] mx-auto`}
+                    ${index === activeIndex ? "border-[#232323] scale-105" : "border-[#232323] scale-85"}
+                    bg-[#232323] h-[28rem] w-[80%] mx-auto`}
                   >
                     <CardContent className="p-0 relative w-full h-full">
                       <img
@@ -101,10 +101,10 @@ export default function TeamCarousel() {
                         alt={member.name}
                         className="w-full h-full object-cover"
                       />
-                      <div className="absolute bottom-0 left-0 right-0 bg-gray-900/90 p-4 flex items-center justify-between">
+                      <div className="absolute bottom-0 left-0 right-0 bg-[#3b3b3b] p-4 flex items-center justify-between">
                         <h3 className="text-white text-lg font-semibold">{member.name}</h3>
                         <a href={member.linkedin} target="_blank" rel="noopener noreferrer">
-                          <Linkedin className="w-6 h-6 text-blue-400 hover:text-blue-500 transition" />
+                          <Linkedin className="w-6 h-6 text-[#121212] hover:text-blue-500 transition" />
                         </a>
                       </div>
                     </CardContent>
