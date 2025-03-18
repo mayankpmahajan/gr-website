@@ -9,32 +9,32 @@ import { Carousel, CarouselContent, CarouselItem } from "./ui/carousel"
 const teamMembers = [
   {
     id: 1,
-    name: "George Washington",
-    image: "/placeholder.svg?height=400&width=300",
+    name: "Manas Chopra",
+    image: "/presidents/manas.jpg",
     linkedin: "https://linkedin.com/in/example1",
   },
   {
     id: 2,
-    name: "Abraham Lincoln",
-    image: "/placeholder.svg?height=400&width=300",
+    name: "Pratham Batra",
+    image: "/presidents/pratham.jpg",
     linkedin: "https://linkedin.com/in/example2",
   },
   {
     id: 3,
-    name: "Thomas Jefferson",
-    image: "/placeholder.svg?height=400&width=300",
+    name: "Arnav Gupta",
+    image: "/presidents/arnav.jpg",
     linkedin: "https://linkedin.com/in/example3",
   },
   {
     id: 4,
-    name: "Theodore Roosevelt",
-    image: "/placeholder.svg?height=400&width=300",
+    name: "Shivam Verma",
+    image: "/presidents/saksham.jpg",
     linkedin: "https://linkedin.com/in/example4",
   },
   {
     id: 5,
-    name: "Franklin D. Roosevelt",
-    image: "/placeholder.svg?height=400&width=300",
+    name: "Mayank Mahajan",
+    image: "/presidents/mayank.jpg",
     linkedin: "https://linkedin.com/in/example5",
   },
 ]

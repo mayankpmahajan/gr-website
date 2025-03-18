@@ -38,9 +38,9 @@ const carouselData = [
   {
     id: 3,
     image: "/placeholder.svg?height=300&width=500",
-    video: "/placeholder.svg?height=500&width=300",
+    video: "/core/video/garima.mp4",
     user: {
-      name: "Maria",
+      name: "Garima",
       position: "Developer",
       avatar: "/placeholder.svg?height=40&width=40&text=M",
       description:
@@ -53,9 +53,9 @@ const carouselData = [
   {
     id: 4,
     image: "/placeholder.svg?height=300&width=500",
-    video: "/placeholder.svg?height=500&width=300",
+    video: "/core/video/akshay.mp4",
     user: {
-      name: "John",
+      name: "Akshay Kumar Sharma",
       position: "Marketer",
       avatar: "/placeholder.svg?height=40&width=40&text=J",
       description:
@@ -68,9 +68,9 @@ const carouselData = [
   {
     id: 5,
     image: "/placeholder.svg?height=300&width=500",
-    video: "/placeholder.svg?height=500&width=300",
+    video: "/core/video/mayank.mp4",
     user: {
-      name: "Sarah",
+      name: "Mayank Mahajan",
       position: "Product Manager",
       avatar: "/placeholder.svg?height=40&width=40&text=S",
       description:
@@ -113,9 +113,9 @@ const carouselData = [
   {
     id: 8,
     image: "/placeholder.svg?height=300&width=500",
-    video: "/placeholder.svg?height=500&width=300",
+    video: "/core/video/garima.mp4",
     user: {
-      name: "Maria",
+      name: "Garima",
       position: "Developer",
       avatar: "/placeholder.svg?height=40&width=40&text=M",
       description:
