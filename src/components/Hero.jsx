@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import gsap from 'gsap';
-import Spectacles from '../components/Spectacles';
+import Spectacles from './Spectacles';
 
 const LENS_COLORS = {
   left: '#87CEEB',  // Blue
