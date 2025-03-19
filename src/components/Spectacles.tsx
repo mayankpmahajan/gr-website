@@ -145,7 +145,7 @@ const Spectacles: React.FC<SpectaclesProps> = ({ onMagnify, isMobile = false }):
     modelScene.traverse(setupLens);
   }, [modelScene, isMobile]);
 
-  const spectaclesScale = isMobile ? [1, 3, 1] : [4, 4, 4];  // Adjusted scales
+  const spectaclesScale = isMobile ? [1, 3, 1] : [5, 4, 4];  // Adjusted scales
 const spectaclesPosition = isMobile ? [0, -2.5, 0]: [0, -4, 0];
 
   return (
