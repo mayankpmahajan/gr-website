@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 import { IoShareSocial } from "react-icons/io5";
 import { motion } from "framer-motion";
-import { gsap } from "gsap";
+import { useState } from "react";
+import { IoArrowBack, IoArrowForward } from "react-icons/io5";
 
 const upcomingEvents = [
   {
@@ -73,8 +74,43 @@ const pastEvents = [
   },
 ];
 
+const spotlightEvents = [
+  {
+    name: "CodeKshetra 2.0",
+    image: "/Spotlight/CK2.0.jpeg",
+    content:
+      "🌟15,000+ Code Warriors! One of India's biggest hackathons—where innovation went wild! 🚀🔥",
+  },
+  {
+    name: "Pears Global",
+    image: "/Spotlight/Pears.jpeg",
+    content:
+      "🌟🌍 A Global Coding Frenzy! 2K+ registrations, 12+ countries—where borders blurred & innovation soared! 🚀🔥",
+  },
+  {
+    name: "CodeCubicle 3.0",
+    image: "/Spotlight/CC3.0.jpg",
+    content:
+      "🚀 Code, Caffeine & Conquered! A hackathon that rocked the MasterCard Office! 💥🔥",
+  },
+];
+
 //Main function
 export default function Events() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleNext = () => {
+    setCurrentIndex((prev) =>
+      prev === spotlightEvents.length - 1 ? 0 : prev + 1
+    );
+  };
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) =>
+      prev === 0 ? spotlightEvents.length - 1 : prev - 1
+    );
+  };
+
   return (
     <div className="h-full relative bg-[#121212] md:py-5">
       {/* Events Page Banner with Animation */}
@@ -99,27 +135,116 @@ export default function Events() {
         </p>
       </motion.section>
 
-      <section>
-        <h1 className="text-[2.3rem] md:ml-[24px] md:text-[4rem] font-satoshi-bold text-center tracking-tight mb-3 md:mb-2 md:mt-[7rem] text-[#F2F2F2]">
+      <motion.section
+        initial={{ y: -100, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        exit={{ opacity: 0 }}
+        viewport={{ once: false, amount: 0.5 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
+      >
+        <h1 className="text-[2.3rem] md:ml-[6rem] ml-[2rem] md:text-[4rem] font-satoshi-bold text-center tracking-loose mb-3 md:mb-2 md:mt-[7rem] text-[#F2F2F2]">
           SPOTLIGHT 🚀
         </h1>
-        <section className="relative flex justify-center items-center min-h-screen bg-[#121212] px-5 md:px-20">
-          {/* Left Box (Orange) */}
-          <div
-            className="absolute w-32 h-32 md:w-56 md:h-56 bg-orange-500 rounded-xl 
-               md:left-[10rem] top-[4rem] md:top-50"
-          ></div>
+
+        <section className="relative flex flex-col md:flex-row justify-center items-center min-h-screen bg-[#121212] md:px-10 md:gap-x-16">
+          {/* Left Box (Orange) - Adjusted width */}
+          <div className="relative w-[60%] h-[300px] md:w-[25%] md:h-[400px] flex justify-end md:ml-[-19rem]">
+            {spotlightEvents.slice(0, currentIndex + 1).map((event, index) => (
+              <motion.div
+                key={index}
+                initial={{ y: -200, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{
+                  duration: 0.8,
+                  ease: "easeOut",
+                  delay: index * 0.1,
+                }}
+                className={`absolute w-[90%] h-[120px] md:h-[100px] flex items-center justify-center 
+      text-white font-bold text-lg md:text-2xl rounded-lg 
+      shadow-lg p-3 
+      ${
+        index === 0
+          ? "bg-gradient-to-r from-pink-500 to-purple-700"
+          : index === 1
+          ? "bg-gradient-to-r from-[#B6DD48] to-green-900 text-black"
+          : "bg-gradient-to-r from-[#252323] to-gray-500"
+      }`}
+                style={{ top: index * 80 }}
+              >
+                {event.name}
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Previous Arrow Button (Moved closer inside screen) */}
+          <button
+            onClick={handlePrev}
+            disabled={currentIndex === 0}
+            className={`absolute left-2 md:left-10 p-3 rounded-full ${
+              currentIndex === 0
+                ? "opacity-30 cursor-not-allowed"
+                : "bg-gray-800 hover:bg-gray-700"
+            } text-[#F15A22] text-xl`}
+          >
+            <IoArrowBack />
+          </button>
 
           {/* Center Box (Black) */}
-          <div className="w-80 h-80 md:w-[29vw] md:h-[90vh] bg-gray-800 rounded-xl "></div>
+          <motion.div
+            initial={{ y: -100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+            className="w-[85vw] h-[50vh] md:w-[30vw] md:h-[75vh] bg-gray-800 rounded-xl flex items-center justify-center relative"
+          >
+            <img
+              src={spotlightEvents[currentIndex].image}
+              className="w-full h-full object-cover rounded-xl transition-all duration-500"
+            />
+          </motion.div>
 
-          {/* Right Box (Blue) */}
-          <div
-            className="absolute w-32 h-32 md:w-56 md:h-56 bg-cyan-500 rounded-xl 
-               md:right-[10rem] bottom-[4rem] md:top-[26rem]"
-          ></div>
+          {/* Next Arrow Button */}
+          <button
+            onClick={handleNext}
+            disabled={currentIndex === spotlightEvents.length - 1}
+            className={`absolute right-5 md:right-10 p-3 rounded-full ${
+              currentIndex === spotlightEvents.length - 1
+                ? "opacity-30 cursor-not-allowed"
+                : "bg-gray-800 hover:bg-gray-700"
+            } text-[#F15A22] text-xl`}
+          >
+            <IoArrowForward />
+          </button>
+
+          {/* Right Box (Blue) - Positioned below in mobile */}
+          <div className="relative w-[90%] md:w-[18%] h-[300px] flex justify-start md:mr-[-19rem] ml-8 md:ml-0 mt-8 md:mt-0">
+            {spotlightEvents.slice(0, currentIndex + 1).map((event, index) => (
+              <motion.div
+                key={index}
+                initial={{ x: 200, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{
+                  duration: 0.8,
+                  ease: "easeOut",
+                  delay: index * 0.1,
+                }}
+                className={`absolute w-[90%] h-[120px] md:h-[260px] flex items-center justify-center 
+      text-white font-bold text-lg md:text-xl rounded-lg 
+      shadow-lg p-3 
+      ${
+        index === 0
+          ? "bg-gradient-to-r from-pink-500 to-purple-700"
+          : index === 1
+          ? "bg-gradient-to-r from-[#B6DD48] to-green-900 text-black"
+          : " bg-gradient-to-r from-[#252323] to-gray-500"
+      }`}
+                style={{ top: index * 80 }}
+              >
+                {event.content}
+              </motion.div>
+            ))}
+          </div>
         </section>
-      </section>
+      </motion.section>
 
       {/* Upcoming Events */}
       <motion.section
@@ -131,17 +256,9 @@ export default function Events() {
         transition={{ duration: 1.5, ease: "easeOut" }}
         className="text-[#F2F2F2] flex flex-col items-center p-5 md:p-10 md:mt-[6rem] mt-[5rem]"
       >
-        <motion.h1
-          initial={{ x: -100, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          whileInView={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          viewport={{ once: false, amount: 0.5 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-          className="text-[2.3rem] md:text-[6rem] font-satoshi-bold mb-5 md:mb-10 tracking-tighter text-center"
-        >
+        <h1 className="text-[2.3rem] md:text-[6rem] font-satoshi-bold mb-5 md:mb-10 tracking-tighter text-center">
           UPCOMING EVENTS 🚀
-        </motion.h1>
+        </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 w-full md:w-[80%]">
           {upcomingEvents.map((event, index) => (
@@ -169,17 +286,9 @@ export default function Events() {
         transition={{ duration: 1.5, ease: "easeOut" }}
         className="min-h-screen text-white flex flex-col items-center p-5 md:p-10 md:mt-[6rem] mt-[7rem]"
       >
-        <motion.h1
-          inital={{ x: 100, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          whileInView={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          viewport={{ once: false, amount: 0.5 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-          className="text-[2.3rem] md:text-[6rem] font-satoshi-bold mb-5 md:mb-8 tracking-tighter text-center"
-        >
+        <h1 className="text-[2.3rem] md:text-[6rem] font-satoshi-bold mb-5 md:mb-8 tracking-tighter text-center">
           PAST EVENTS 🌟
-        </motion.h1>
+        </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 w-full md:w-[80%]">
           {pastEvents.map((event, index) => (
