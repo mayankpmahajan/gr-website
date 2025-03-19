@@ -77,7 +77,7 @@ export default function ChaptersSection() {
       div.dataset.id = String(chapter.id)
 
       div.innerHTML = `
-        <div class="h-full rounded-lg overflow-hidden shadow-md bg-[#232323] border border-gray-200">
+        <div class="h-full rounded-lg overflow-hidden shadow-md bg-[#232323]">
           <div class="flex items-center h-full min-h-[220px]">
             <div class="flex items-center justify-center w-2/5 h-full min-h-[220px]">
               <img 
@@ -217,7 +217,7 @@ export default function ChaptersSection() {
   return (
     <section className="py-12 px-4 bg-background overflow-hidden">
       <div className="container mx-auto">
-        <h2 className="md:text-8xl text-5xl font-bold mb-12 text-[#fff] text-center">Chapters</h2>
+        <h2 className="md:text-9xl text-5xl font-bold mb-20 text-[#fff] text-center">CHAPTERS</h2>
 
         {/* Top carousel - moves right */}
         <div className="overflow-hidden mb-12">

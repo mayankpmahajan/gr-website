@@ -9,32 +9,32 @@ import { Carousel, CarouselContent, CarouselItem } from "./ui/carousel"
 const teamMembers = [
   {
     id: 1,
-    name: "George Washington",
-    image: "/placeholder.svg?height=400&width=300",
+    name: "Manas Chopra",
+    image: "/presidents/manas.jpg",
     linkedin: "https://linkedin.com/in/example1",
   },
   {
     id: 2,
-    name: "Abraham Lincoln",
-    image: "/placeholder.svg?height=400&width=300",
+    name: "Pratham Batra",
+    image: "/presidents/pratham.jpg",
     linkedin: "https://linkedin.com/in/example2",
   },
   {
     id: 3,
-    name: "Thomas Jefferson",
-    image: "/placeholder.svg?height=400&width=300",
+    name: "Arnav Gupta",
+    image: "/presidents/arnav.jpg",
     linkedin: "https://linkedin.com/in/example3",
   },
   {
     id: 4,
-    name: "Theodore Roosevelt",
-    image: "/placeholder.svg?height=400&width=300",
+    name: "Shivam Verma",
+    image: "/presidents/saksham.jpg",
     linkedin: "https://linkedin.com/in/example4",
   },
   {
     id: 5,
-    name: "Franklin D. Roosevelt",
-    image: "/placeholder.svg?height=400&width=300",
+    name: "Mayank Mahajan",
+    image: "/presidents/mayank.jpg",
     linkedin: "https://linkedin.com/in/example5",
   },
 ]
@@ -61,7 +61,7 @@ export default function TeamCarousel() {
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-black text-white py-12 px-4 relative">
-      <h1 className="md:text-6xl text-5xl font-bold text-center mb-32">THE PRESIDENTS</h1>
+      <h1 className="md:text-9xl text-5xl font-bold text-center mb-32">THE PRESIDENTS</h1>
 
       <div className="relative w-full max-w-6xl mx-auto">
         <Carousel
@@ -89,11 +89,11 @@ export default function TeamCarousel() {
                 key={member.id}
                 className="pl-4 md:basis-1/3 basis-full"
               >
-                <div className="h-[26rem] flex items-center justify-center">
+                <div className="h-[30rem] flex items-center justify-center">
                   <Card
                     className={`relative overflow-hidden border-2 transition-all duration-700 ease-in-out transform 
-                    ${index === activeIndex ? "border-blue-500 scale-105" : "border-gray-700 scale-95"}
-                    bg-gray-800 h-[350px] w-[80%] mx-auto`}
+                    ${index === activeIndex ? "border-[#232323] scale-105" : "border-[#232323] scale-85"}
+                    bg-[#232323] h-[28rem] w-[80%] mx-auto`}
                   >
                     <CardContent className="p-0 relative w-full h-full">
                       <img
@@ -101,10 +101,10 @@ export default function TeamCarousel() {
                         alt={member.name}
                         className="w-full h-full object-cover"
                       />
-                      <div className="absolute bottom-0 left-0 right-0 bg-gray-900/90 p-4 flex items-center justify-between">
+                      <div className="absolute bottom-0 left-0 right-0 bg-[#3b3b3b] p-4 flex items-center justify-between">
                         <h3 className="text-white text-lg font-semibold">{member.name}</h3>
                         <a href={member.linkedin} target="_blank" rel="noopener noreferrer">
-                          <Linkedin className="w-6 h-6 text-blue-400 hover:text-blue-500 transition" />
+                          <Linkedin className="w-6 h-6 text-[#121212] hover:text-blue-500 transition" />
                         </a>
                       </div>
                     </CardContent>
