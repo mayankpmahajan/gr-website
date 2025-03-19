@@ -202,7 +202,7 @@ export default function Events() {
             />
           </motion.div>
 
-          {/* Next Arrow Button */}
+          {/* Next Arrow Button for both*/}
           <button
             onClick={handleNext}
             disabled={currentIndex === spotlightEvents.length - 1}
