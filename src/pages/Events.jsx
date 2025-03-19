@@ -1,5 +1,8 @@
 /* eslint-disable react/prop-types */
 import { IoShareSocial } from "react-icons/io5";
+import { motion } from "framer-motion";
+import { useState } from "react";
+import { IoArrowBack, IoArrowForward } from "react-icons/io5";
 
 const upcomingEvents = [
   {
@@ -7,7 +10,7 @@ const upcomingEvents = [
     date: "March 18, 2025",
     venue: "New Delhi",
     details:
-      "🚀 Code With DCG – Where Innovation Meets Impact! 🚀Where geeks build, innovators rise, and code shapes the future!Are you ready to push the boundaries of technology, fuel your brain with caffeine, and bring your wildest ideas to life? Code With DCG isn’t just a hackathon—it’s a 24-hour adrenaline rush of coding, creativity, and problem-solving, brought to you by Geek Room & DCG at Delhi Technological University.",
+      "🚀 Code With DCG – Where Innovation Meets Impact! 🚀Where geeks build, innovators rise, and code shapes the future!Are you ready to push the boundaries of technology.",
     social: "https://code-with-dcg.devfolio.co/",
     image: "/DGC.jpg",
   },
@@ -17,7 +20,7 @@ const upcomingEvents = [
     venue: "Jaipur",
     social: "https://codemanipal.devfolio.co/",
     details:
-      "🌟 Code-ए-Manipal: Where Innovation Meets Scarcity of Water 🌟Are you ready to unleash your inner tech wizard, survive on caffeine, and redefine what it means to innovate?Code-ए-Manipal isn’t just a hackathon – it’s a 36-hour rollercoaster of creativity, chaos, and cutting-edge ideas, hosted by LearnIT MUJ and the tech rebels at Geek Room.",
+      "🌟 Code-ए-Manipal: Where Innovation Meets Scarcity of Water 🌟Are you ready to unleash your inner tech wizard, survive on caffeine, and redefine what it means to innovate? ",
     image: "/ab2.jpg",
   },
   {
@@ -26,8 +29,7 @@ const upcomingEvents = [
     venue: "Greater Noida",
     social: "https://code-nakshatra.devfolio.co/",
     details:
-      "Where Innovators Collide and Code Takes Flight🌟Code Nakshatra: Where Ideas Shine and Dreams Soar🌟Get ready to unlock your coding superpowers, fuel up on ideas (and maybe some coffee), and experience a hackathon like never before. Code Nakshatra isn’t just another tech event – it’s a 24-hour adventure in innovation, collaboration, and fierce competition, hosted by Code Rangers and Geek Room TIIPS.",
-    link: "https://code-nakshatra.xyz/",
+      "Where Innovators Collide and Code Takes Flight🌟Code Nakshatra: Where Ideas Shine and Dreams Soar🌟Get ready to unlock your coding superpowers, fuel up on ideas (and maybe some coffee), and experience a hackathon like never before. Code Nakshatra isn’t just another tech event.",
     image: "/Nakshatra.jpg",
   },
 ];
@@ -38,7 +40,7 @@ const pastEvents = [
     date: "May 15-19, 2024",
     venue: "Noida, India",
     details:
-      "🌟 Introducing Code Cubicle: Unlocking Collaboration & Innovation, One Cubicle at a Time!🚀 Join us for an unparalleled tech adventure at Code Cubicle, the ultimate hackathon brought to you by Geek Room. Dive into the heart of innovation and creativity as we redefine the essence of technology-driven solutions.",
+      "🌟 Introducing Code Cubicle: Unlocking Collaboration & Innovation, One Cubicle at a Time!🚀 Join us for an unparalleled tech adventure at Code Cubicle, the ultimate hackathon brought to you by Geek Room..",
     social: "https://code-cubicle.devfolio.co/",
     image: "/CC3.0.jpg",
   },
@@ -48,7 +50,7 @@ const pastEvents = [
     venue: "New Delhi",
     social: "https://code-kshetra-2.devfolio.co/",
     details:
-      "🌟 Code Kshetra 2.0: Where Innovation Meets Madness🌟Are you ready to unleash your inner tech wizard, survive on caffeine, and redefine what it means to innovate?Code Kshetra isn’t just a hackathon – it’s a 36-hour rollercoaster of creativity, chaos, and cutting-edge ideas, hosted by JIMS Sector-5 Rohini and the tech rebels at Geek Room.",
+      "🌟 Code Kshetra 2.0: Where Innovation Meets Madness🌟Are you ready to unleash your inner tech wizard, survive on caffeine, and redefine what it means to innovate?Code Kshetra isn’t just a hackathon.",
     link: "https://codekshetra2.geekroom.in/",
     image: "/ab7.jpg",
   },
@@ -58,7 +60,7 @@ const pastEvents = [
     venue: "New Delhi",
     social: "https://code-kshetra.devfolio.co/",
     details:
-      "🚀 Code Kshetra: Where Geeks Battle with Code & Innovation📌 Welcome to Code Kshetra, a groundbreaking hackathon jointly organised by JIMS Sector-5 Rohini and Geek Room. Immerse yourself in the heart of tech innovation as we present a unique experience, to redefine the boundaries of creativity and technology.",
+      "🚀 Code Kshetra: Where Geeks Battle with Code & Innovation📌 Welcome to Code Kshetra, a groundbreaking hackathon jointly organised by JIMS Sector-5 Rohini and Geek Room.",
     image: "/CK1.0.jpg",
   },
   {
@@ -67,82 +69,242 @@ const pastEvents = [
     venue: "New Delhi",
     social: "https://techminds.devfolio.co/",
     details:
-      "Join TechMinds, an exhilarating hackathon co-organized by Geek Room and the Artificial Intelligence Experience Centre, IITM Janakpuri. This event invites tech enthusiasts and innovators to push the boundaries of creativity and technology. Scheduled for 15th and 16th March 2024, this 30-hour offline event in Delhi will feature live project presentations, idea pitching sessions, and judging by an esteemed panel",
+      "Join TechMinds, an exhilarating hackathon co-organized by Geek Room and the Artificial Intelligence Experience Centre, IITM Janakpuri. This event invites tech enthusiasts and innovators to push the boundaries of creativity and technology. ",
     image: "/TechMinds.jpg",
   },
 ];
 
-const ongoingEvents = [
+const spotlightEvents = [
   {
-    name: "Pears Global Hackathon",
-    date: "Feb 28 - March 11 , 2025",
-    venue: "Global - Online",
-    social: "https://lu.ma/9mqll98a",
-    details:
-      "Welcome to Pears Hackathon 2025, hosted in collaboration with Geek Room and Pears Technology! This global online hackathon invites participants from all over the world to innovate, collaborate, and build cutting-edge projects using Pears Technology.Whether you're a student, professional, or coding enthusiast, this is your chance to showcase your creativity, solve real-world problems, and compete for exciting rewards. With expert mentorship, challenging problem statements, and a collaborative innovation space, we aim to provide an unforgettable hackathon experience.",
-    link: "https://pearshack.geekroom.in/",
-    image: "/pears.jpg",
+    name: "CodeKshetra 2.0",
+    image: "/Spotlight/CK2.0.jpeg",
+    content:
+      "🌟15,000+ Code Warriors! One of India's biggest hackathons—where innovation went wild! 🚀🔥",
+  },
+  {
+    name: "Pears Global",
+    image: "/Spotlight/Pears.jpeg",
+    content:
+      "🌟🌍 A Global Coding Frenzy! 2K+ registrations, 12+ countries—where borders blurred & innovation soared! 🚀🔥",
+  },
+  {
+    name: "CodeCubicle 3.0",
+    image: "/Spotlight/CC3.0.jpg",
+    content:
+      "🚀 Code, Caffeine & Conquered! A hackathon that rocked the MasterCard Office! 💥🔥",
   },
 ];
 
-//Main Body :
+//Main function
 export default function Events() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleNext = () => {
+    setCurrentIndex((prev) =>
+      prev === spotlightEvents.length - 1 ? 0 : prev + 1
+    );
+  };
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) =>
+      prev === 0 ? spotlightEvents.length - 1 : prev - 1
+    );
+  };
+
   return (
-    <div className="h-full relative bg-[#121212]">
-      {/* Events Page Banner */}
-      <section className="max-h-screen md:mb-5 bg-[#121212] flex flex-col items-center justify-center text-[#F2F2F2] px-4">
+    <div className="h-full relative bg-[#121212] md:py-5">
+      {/* Events Page Banner with Animation */}
+      <motion.section
+        initial={{ scale: 0.7, opacity: 0 }}
+        whileInView={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 1.8, ease: "easeInOut" }}
+        viewport={{ once: false, amount: 0.4 }}
+        className="max-h-screen md:mb-8 flex flex-col items-center justify-center text-[#F2F2F2] px-4"
+      >
         <img
           src="./logo/transparent_geek_room_logo.svg"
           alt="Logo"
-          className="w-20 h-20 md:w-42 md:h-42 md:mb-4 mt-[6rem] mb-[5.5rem] md:my-4"
+          className="w-20 h-20 md:w-42 md:h-42 md:mb-1 mt-[7rem] mb-[5.5rem] md:my-14"
         />
-        <h1 className="text-[2.3rem] md:text-[8rem] font-satoshi-bold text-center tracking-tight mb-3 md:mb-4">
+        <h1 className="text-[2.3rem] md:text-[8rem] font-satoshi-bold text-center tracking-tight mb-3 md:mb-4 md:mt-[1rem]">
           EVENTS
         </h1>
         <p className="text-lg md:text-xl font-satoshi text-center mb-[6rem] md:mb-4">
           &apos;&apos;A community dedicated to helping each other get better at
           coding together&apos;&apos;
         </p>
-      </section>
+      </motion.section>
 
-      <section className="text-[#F2F2F2] flex flex-col items-center p-5 md:p-11 md:mt-[6rem] mt-[7rem]">
-        <h1 className="text-[2.3rem] text-[#F2F2F2] md:ml-5 md:text-[6rem] font-satoshi-bold mb-5 md:mb-10 tracking-tighter text-center">
-          ONGOING EVENTS 🔥
+      <motion.section
+        initial={{ y: -100, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        exit={{ opacity: 0 }}
+        viewport={{ once: false, amount: 0.5 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
+      >
+        <h1 className="text-[2.3rem] md:ml-[6rem] ml-[2rem] md:text-[4rem] font-satoshi-bold text-center tracking-loose mb-3 md:mb-2 md:mt-[7rem] text-[#F2F2F2]">
+          SPOTLIGHT 🚀
         </h1>
-        <div className="grid grid-cols-1 md:grid-cols-1 gap-5 md:gap-8 w-full mt-2 md:w-[36%]">
-          {ongoingEvents.map((event, index) => (
-            <EventCard key={index} event={event} />
-          ))}
-        </div>
-      </section>
+
+        <section className="relative flex flex-col md:flex-row justify-center items-center min-h-screen bg-[#121212] md:px-10 md:gap-x-16">
+          {/* Left Box (Orange) - Adjusted width */}
+          <div className="relative w-[60%] h-[300px] md:w-[25%] md:h-[400px] flex justify-end md:ml-[-19rem]">
+            {spotlightEvents.slice(0, currentIndex + 1).map((event, index) => (
+              <motion.div
+                key={index}
+                initial={{ y: -200, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{
+                  duration: 0.8,
+                  ease: "easeOut",
+                  delay: index * 0.1,
+                }}
+                className={`absolute w-[90%] h-[120px] md:h-[100px] flex items-center justify-center 
+      text-white font-bold text-lg md:text-2xl rounded-lg 
+      shadow-lg p-3 
+      ${
+        index === 0
+          ? "bg-gradient-to-r from-pink-500 to-purple-700"
+          : index === 1
+          ? "bg-gradient-to-r from-[#B6DD48] to-green-900 text-black"
+          : "bg-gradient-to-r from-[#252323] to-gray-500"
+      }`}
+                style={{ top: index * 80 }}
+              >
+                {event.name}
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Previous Arrow Button (Moved closer inside screen) */}
+          <button
+            onClick={handlePrev}
+            disabled={currentIndex === 0}
+            className={`absolute left-2 md:left-10 p-3 rounded-full ${
+              currentIndex === 0
+                ? "opacity-30 cursor-not-allowed"
+                : "bg-gray-800 hover:bg-gray-700"
+            } text-[#F15A22] text-xl`}
+          >
+            <IoArrowBack />
+          </button>
+
+          {/* Center Box (Black) */}
+          <motion.div
+            initial={{ y: -100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+            className="w-[85vw] h-[50vh] md:w-[30vw] md:h-[75vh] bg-gray-800 rounded-xl flex items-center justify-center relative"
+          >
+            <img
+              src={spotlightEvents[currentIndex].image}
+              className="w-full h-full object-cover rounded-xl transition-all duration-500"
+            />
+          </motion.div>
+
+          {/* Next Arrow Button for both*/}
+          <button
+            onClick={handleNext}
+            disabled={currentIndex === spotlightEvents.length - 1}
+            className={`absolute right-5 md:right-10 p-3 rounded-full ${
+              currentIndex === spotlightEvents.length - 1
+                ? "opacity-30 cursor-not-allowed"
+                : "bg-gray-800 hover:bg-gray-700"
+            } text-[#F15A22] text-xl`}
+          >
+            <IoArrowForward />
+          </button>
+
+          {/* Right Box (Blue) - Positioned below in mobile */}
+          <div className="relative w-[90%] md:w-[18%] h-[300px] flex justify-start md:mr-[-19rem] ml-8 md:ml-0 mt-8 md:mt-0">
+            {spotlightEvents.slice(0, currentIndex + 1).map((event, index) => (
+              <motion.div
+                key={index}
+                initial={{ x: 200, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{
+                  duration: 0.8,
+                  ease: "easeOut",
+                  delay: index * 0.1,
+                }}
+                className={`absolute w-[90%] h-[120px] md:h-[260px] flex items-center justify-center 
+      text-white font-bold text-lg md:text-xl rounded-lg 
+      shadow-lg p-3 
+      ${
+        index === 0
+          ? "bg-gradient-to-r from-pink-500 to-purple-700"
+          : index === 1
+          ? "bg-gradient-to-r from-[#B6DD48] to-green-900 text-black"
+          : " bg-gradient-to-r from-[#252323] to-gray-500"
+      }`}
+                style={{ top: index * 80 }}
+              >
+                {event.content}
+              </motion.div>
+            ))}
+          </div>
+        </section>
+      </motion.section>
 
       {/* Upcoming Events */}
-      <section className="text-[#F2F2F2] flex flex-col items-center p-5 md:p-10 md:mt-[6rem] mt-[7rem]">
+      <motion.section
+        initial={{ x: -100, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        whileInView={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        viewport={{ once: false, amount: 0.5 }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
+        className="text-[#F2F2F2] flex flex-col items-center p-5 md:p-10 md:mt-[6rem] mt-[5rem]"
+      >
         <h1 className="text-[2.3rem] md:text-[6rem] font-satoshi-bold mb-5 md:mb-10 tracking-tighter text-center">
           UPCOMING EVENTS 🚀
         </h1>
 
-        {/* Grid for both Desktop & Mobile */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 w-full md:w-[80%]">
           {upcomingEvents.map((event, index) => (
-            <EventCard key={index} event={event} />
+            <motion.div
+              key={index}
+              initial={{ x: -100, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              exit={{ opacity: 0 }}
+              viewport={{ once: false, amount: 0.5 }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
+            >
+              <EventCard event={event} />
+            </motion.div>
           ))}
         </div>
-      </section>
+      </motion.section>
 
       {/* Past Events */}
-      <section className="min-h-screen text-white flex flex-col items-center p-5 md:p-10 md:mt-[6rem] mt-[7rem]">
+      <motion.section
+        initial={{ x: 100, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        whileInView={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        viewport={{ once: false, amount: 0.5 }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
+        className="min-h-screen text-white flex flex-col items-center p-5 md:p-10 md:mt-[6rem] mt-[7rem]"
+      >
         <h1 className="text-[2.3rem] md:text-[6rem] font-satoshi-bold mb-5 md:mb-8 tracking-tighter text-center">
           PAST EVENTS 🌟
         </h1>
 
-        {/* Grid for both Desktop & Mobile */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 w-full md:w-[80%]">
           {pastEvents.map((event, index) => (
-            <EventCard key={index} event={event} />
+            <motion.div
+              key={index}
+              initial={{ x: 100, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              exit={{ opacity: 0 }}
+              viewport={{ once: false, amount: 0.5 }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
+            >
+              <EventCard event={event} />
+            </motion.div>
           ))}
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 }
@@ -150,8 +312,7 @@ export default function Events() {
 // Event Card Component
 function EventCard({ event }) {
   return (
-    <div className="bg-[#F2F2F2] p-6 rounded-lg flex flex-col gap-3 relative transition-transform hover:scale-105">
-      {/* Profile + Event Name */}
+    <div className="bg-[#242424] p-6 rounded-lg flex flex-col gap-3 relative">
       <div className="flex items-center gap-4">
         <div className="h-34 w-34 object-cover bg-gray-300 rounded-full">
           <img
@@ -160,7 +321,7 @@ function EventCard({ event }) {
           />
         </div>
         <div>
-          <h2 className="text-lg md:text-2xl md:py-3 font-semibold text-black">
+          <h2 className="text-lg md:text-2xl md:py-3 font-semibold text-white">
             {event.name}
           </h2>
           <p className="text-sm md:text-lg text-[#F15A22]">
@@ -168,14 +329,10 @@ function EventCard({ event }) {
           </p>
         </div>
       </div>
-
-      {/* Details */}
-      <p className="text-md pt-3 text-[#121212]">{event.details}</p>
-
-      {/* Icons + Button */}
+      <p className="text-md pt-3 text-white">{event.details}</p>
       <div className="flex justify-between items-center mt-4">
         <div className="flex gap-2">
-          <div className="text-[#121212] rounded-full">
+          <div className="text-white rounded-full">
             <a href={event.link}>
               <IoShareSocial />
             </a>
